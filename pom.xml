@@ -3,26 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Model -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Coordinates -->
+    <!-- Project Coordinates -->
     <groupId>com.demo</groupId>
     <artifactId>sonar-nexus-demo</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <name>Sonar Nexus Demo</name>
+
     <!-- Properties -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Java -->
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-
-        <!-- SonarQube -->
-        <sonar.host.url>http://13.127.183.63:9000</sonar.host.url>
-        <sonar.login>sqa_995ef9b17e41b54f1ed0674f117ad6f806535070</sonar.login>
     </properties>
 
     <!-- Dependencies -->
@@ -37,6 +32,8 @@
 
     <!-- Build -->
     <build>
+        <finalName>sonar-nexus-demo</finalName>
+
         <plugins>
 
             <!-- Compiler -->
@@ -44,13 +41,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
             </plugin>
 
-            <!-- WAR -->
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -59,6 +52,26 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+        </plugins>
+    </build>
+
+    <!-- Nexus Deployment -->
+    <distributionManagement>
+
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://YOUR-NEXUS-IP:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://YOUR-NEXUS-IP:8081/repository/maven-releases/</url>
+        </repository>
+
+    </distributionManagement>
+
+</project>
 
         </plugins>
     </build>
